@@ -1,4 +1,7 @@
-# PS
+# 알고리즘 기록일지
+
+
+
 ### BOJ
 <br />
 <a href="https://solved.ac/da9dac">
