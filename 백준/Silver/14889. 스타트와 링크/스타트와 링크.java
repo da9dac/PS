@@ -50,11 +50,8 @@ class Main {
 		int start = 0;
 		int link = 0;
 
-		boolean[] isVisited = new boolean[n];
-
 		for (int i = 0; i < n; i++) {
-			for (int j = 0; j < n; j++) {
-				if (isVisited[j] || i == j) continue;
+			for (int j = i + 1; j < n; j++) {
 
 				if (isUsed[i] == isUsed[j]) {
 					if (isUsed[i]) {
@@ -64,7 +61,6 @@ class Main {
 					}
 				}
 			}
-			isVisited[i] = true;
 		}
 
 		min = Math.min(min, Math.abs(start - link));
