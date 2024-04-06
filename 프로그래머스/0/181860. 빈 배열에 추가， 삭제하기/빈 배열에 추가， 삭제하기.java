@@ -17,7 +17,7 @@ class Solution {
                     result[idx++] = arr[i];
                 }
             } else {
-                for (int j = 0; j < arr[i]; j++) idx--;
+                idx -= arr[i];
             }
         }
         
