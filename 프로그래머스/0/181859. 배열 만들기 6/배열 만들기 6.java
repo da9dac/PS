@@ -2,24 +2,16 @@ import java.util.*;
 
 class Solution {
     public int[] solution(int[] arr) {
-        int[] stk = new int[arr.length];
-        
-        int idx = 0;
+        Stack<Integer> stk = new Stack<>();
         
         for (int i = 0; i < arr.length; i++) {
-            if (idx == 0) {
-                stk[idx++] = arr[i];
+            if (stk.isEmpty() || stk.peek() != arr[i]) {
+                stk.push(arr[i]);
                 continue;
             }
-            
-            if (stk[idx - 1] == arr[i]) {
-                idx--;
-                continue;
-            }
-            
-            stk[idx++] = arr[i];
+            stk.pop();
         }
         
-        return idx == 0 ? new int[]{-1} : Arrays.copyOfRange(stk, 0, idx);
+        return stk.isEmpty() ? new int[]{-1} : stk.stream().mapToInt(i -> i).toArray();
     }
 }
