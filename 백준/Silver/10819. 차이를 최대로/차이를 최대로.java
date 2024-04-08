@@ -22,19 +22,13 @@ public class Main {
 			arr[i] = Integer.parseInt(st.nextToken());
 		}
 
-		solve(0);
+		solve(0, 0);
 
 		System.out.println(max);
 	}
 
-	static void solve(int cnt) {
+	static void solve(int cnt, int sum) {
 		if (cnt == n) {
-			int sum = 0;
-
-			for (int i = 0; i < n - 1; i++) {
-				sum += Math.abs(nums[i] - nums[i+1]);
-			}
-
 			max = Math.max(max, sum);
 			return;
 		}
@@ -43,9 +37,9 @@ public class Main {
 			if (isUsed[i]) continue;
 			isUsed[i] = true;
 			nums[cnt] = arr[i];
-			solve(cnt + 1);
+			if (cnt == 0) solve(cnt + 1, sum);
+			else solve(cnt + 1, sum + Math.abs(nums[cnt - 1] - nums[cnt]));
 			isUsed[i] = false;
 		}
 	}
-
 }
