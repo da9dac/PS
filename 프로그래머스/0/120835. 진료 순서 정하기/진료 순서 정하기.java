@@ -2,21 +2,21 @@ import java.util.*;
 
 class Solution {
     public int[] solution(int[] emergency) {
-        int[][] arr = new int[emergency.length][2];
+        int[] arr = emergency.clone();
         
-        for (int i = 0; i < emergency.length; i++) {
-            arr[i] = new int[]{emergency[i], i};
-        }
-        
-        Arrays.sort(arr, (a, b) -> {
-            return b[0] - a[0];
-        });
+        Arrays.sort(arr);
         
         int[] answer = new int[emergency.length];
-        int rank = 1;
         
         for (int i = 0; i < emergency.length; i++) {
-            answer[arr[i][1]] = rank++;
+            int cnt = 1;
+            for (int j = emergency.length - 1; j >= 0; j--) {
+                if (emergency[i] == arr[j]) {
+                    answer[i] = cnt;
+                    break;
+                }
+                cnt++;
+            }
         }
         
         return answer;
