@@ -46,8 +46,6 @@ class Main {
                 if (isVisited[next] == k) {
                     result.add(next);
                     continue;
-                } else if (isVisited[next] > k) {
-                    continue;
                 }
                 q.offer(next);
             }
