@@ -17,7 +17,7 @@ public class Main {
 
 			for (int j = 0; j < n; j++) {
 				int x = Integer.parseInt(st.nextToken());
-				if (dp[i][j] == 0 ||( i == n - 1 && j == i)) continue;
+				if (dp[i][j] == 0 || x == 0) continue;
 				if (i + x < n) dp[i + x][j] += dp[i][j];
 				if (j + x < n) dp[i][j + x] += dp[i][j];
 			}
