@@ -13,13 +13,11 @@ public class Main {
 
 		n = Integer.parseInt(br.readLine());
 		m = Integer.parseInt(br.readLine());
-
-		near = new ArrayList[n + 1];
 		parent = new int[n + 1];
+		boolean isPossible = true;
 
 		for (int i = 1; i <= n; i++) {
 			parent[i] = i;
-			near[i] = new ArrayList<>();
 		}
 
 		for (int i = 1; i <= n; i++) {
@@ -27,14 +25,7 @@ public class Main {
 
 			for (int j = 1; j <= n; j++) {
 				if (Integer.parseInt(st.nextToken()) == 0) continue;
-				near[j].add(i);
-				near[i].add(j);
-			}
-		}
-
-		for (int i = 1; i <= n; i++) {
-			for (int next : near[i]) {
-				union(i, next);
+				union(i, j);
 			}
 		}
 
@@ -43,12 +34,12 @@ public class Main {
 
 		for (int i = 1; i < m; i++) {
 			if (find(Integer.parseInt(st.nextToken())) != x) {
-				System.out.println("NO");
-				return;
+				isPossible = false;
+				break;
 			}
 		}
 
-		System.out.println("YES");
+		System.out.println(isPossible ? "YES" : "NO");
 	}
 
 	static void union(int x, int y) {
