@@ -1,0 +1,1 @@
+import java.io.*;public class Main {public static void main(String[] args)throws IOException{long road=(2L<<Integer.parseInt(new BufferedReader(new InputStreamReader(System.in)).readLine()))-1;System.out.println((road + 2) / 3);}}
