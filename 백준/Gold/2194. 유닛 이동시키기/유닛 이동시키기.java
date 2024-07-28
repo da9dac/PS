@@ -1,91 +1,97 @@
 import java.io.*;
 import java.util.*;
-import java.awt.*;
 
 public class Main {
 
-	static int N,M,A,B,K;
-    static int arr[][];
-    static boolean visit[][];
-    static int moveX[] = {0,1,0,-1};
-    static int moveY[] = {-1,0,1,0};
-    static Point start, end;
-    public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st = new StringTokenizer(br.readLine());
-        N = Integer.parseInt(st.nextToken());
-        M = Integer.parseInt(st.nextToken());
-        A = Integer.parseInt(st.nextToken());
-        B = Integer.parseInt(st.nextToken());
-        K = Integer.parseInt(st.nextToken());
-        
-        arr = new int[N+1][M+1];
-        visit = new boolean[N+1][M+1];
-        for(int i=0; i<K; i++) {
-            st = new StringTokenizer(br.readLine());
-            int y = Integer.parseInt(st.nextToken());
-            int x = Integer.parseInt(st.nextToken());
-            arr[y][x] = -1;
-        }
-        st = new StringTokenizer(br.readLine());
-        int y = Integer.parseInt(st.nextToken());
-        int x = Integer.parseInt(st.nextToken());
-        start = new Point(x,y);
-        
-        st = new StringTokenizer(br.readLine());
-        y = Integer.parseInt(st.nextToken());
-        x = Integer.parseInt(st.nextToken());
-        end = new Point(x,y);
-        
-        System.out.println(bfs());
-    }
-    static boolean Range(int i, int j) {
-        if(1<=i && i<=N && 1<=j && j<=M)
-            return true;
-        return false;
-    }
-    static boolean isPossible(int i, int j) {
-        if(visit[i][j])
-            return false;
-        for(int i_=i; i_<i+A; i_++) {
-            for(int j_=j; j_<j+B; j_++) {
-                if(!Range(i_,j_))
-                    return false;
-                if(arr[i_][j_] == -1)
-                    return false;
-            }
-        }
-        visit[i][j] = true;
-        return true;
-    }
-    private static int bfs() {
-        Queue<Point> queue = new LinkedList<Point>();
-        queue.add(start);
-        visit[start.y][start.x] = true;
-        int result = 0;
-        while(!queue.isEmpty()) {
-            int size = queue.size(); 
-            for(int i=0; i<size; i++) {
-                Point po = queue.poll();
-                if(po.x == end.x && po.y == end.y) {
-                    return result;
-                }
-                for(int d=0; d<4; d++) {
-                    int newX = po.x + moveX[d];
-                    int newY = po.y + moveY[d];
-                    
-                    if(!Range(newY, newX))
-                        continue;
-                    if(!isPossible(newY, newX))
-                        continue;
-                    
-                    queue.add(new Point(newX,newY));
-                }
-            }
-            result++;
-        }
-        
-        
-        return -1;
-    }
+	public static void main(String[] args) throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st = new StringTokenizer(br.readLine());
+
+		int n = Integer.parseInt(st.nextToken());
+		int m = Integer.parseInt(st.nextToken());
+
+		int a = Integer.parseInt(st.nextToken());
+		int b = Integer.parseInt(st.nextToken());
+
+		int k = Integer.parseInt(st.nextToken());
+
+		int[] dx = {-1, 1, 0, 0};
+		int[] dy = {0, 0, -1, 1};
+		int[][] map = new int[n][m];
+		boolean[][] visited = new boolean[n][m];
+
+		while (k-- > 0) {
+			st = new StringTokenizer(br.readLine());
+
+			int x = Integer.parseInt(st.nextToken()) - 1;
+			int y = Integer.parseInt(st.nextToken()) - 1;
+
+			map[x][y] = 1;
+		}
+
+		st = new StringTokenizer(br.readLine());
+
+		int x = Integer.parseInt(st.nextToken()) - 1;
+		int y = Integer.parseInt(st.nextToken()) - 1;
+
+		visited[x][y] = true;
+		Unit Start = new Unit(x, y, 0);
+
+		st = new StringTokenizer(br.readLine());
+
+		x = Integer.parseInt(st.nextToken()) - 1;
+		y = Integer.parseInt(st.nextToken()) - 1;
+
+		Queue<Unit> queue = new ArrayDeque<>();
+		queue.offer(Start);
+
+		while (!queue.isEmpty()) {
+			Unit u = queue.poll();
+
+			for (int dir = 0; dir < 4; dir++) {
+				int nx = u.x + dx[dir];
+				int ny = u.y + dy[dir];
+
+				if (nx < 0 || nx >= n || ny < 0 || ny >= m || visited[nx][ny]) continue;
+
+				int ex = nx + a - 1;
+				int ey = ny + b - 1;
+
+				if (ex < 0 || ex >= n || ey < 0 || ey >= m) continue;
+
+				boolean possible = true;
+
+				out:
+				for (int i = nx; i <= ex; i++) {
+					for (int j = ny; j <= ey; j++) {
+						if (map[i][j] == 1) {
+							possible = false;
+							break out;
+						}
+					}
+				}
+
+				if (!possible) continue;
+
+				if (nx == x && ny == y) {
+					System.out.println(u.day + 1);
+					return;
+				}
+
+				visited[nx][ny] = true;
+				queue.offer(new Unit(nx, ny, u.day + 1));
+			}
+		}
+
+		System.out.println(-1);
+	}
+
+	static class Unit {
+		int x, y, day;
+		public Unit(int x, int y, int day) {
+			this.x = x;
+			this.y = y;
+			this.day = day;
+		}
+	}
 }
