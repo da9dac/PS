@@ -2,6 +2,10 @@
 
 #### 시작 : 2023/09/21
 
+<a href="https://github.com/devxb/gitanimals">
+  <img src="https://render.gitanimals.org/farms/da9dac"/>
+</a>
+
 ### 목표
 #### 2023 목표 : 골드5 달성 (완료)
 #### 2024 중간목표 : 플래티넘5 달성 (진행중)
