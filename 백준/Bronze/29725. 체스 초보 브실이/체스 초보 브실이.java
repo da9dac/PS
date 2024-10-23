@@ -1,19 +1,13 @@
 import java.io.*;
 
 class Main {
+    
+    static int[] score = {0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 1, 9, 5, 0, 0, 0, 0, 0, 0, 0, 0};
+    
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         
-        int white = 0;
-        int black = 0;
-        
-        int[] score = new int[26];
-        
-        score['p' - 'a'] = 1;
-        score['n' - 'a'] = 3;
-        score['b' - 'a'] = 3;
-        score['r' - 'a'] = 5;
-        score['q' - 'a'] = 9;
+        int sum = 0;
         
         for (int i = 0; i < 8; i++) {
             char[] line = br.readLine().toCharArray();
@@ -21,13 +15,13 @@ class Main {
             for (char c : line) {
                 if (c == '.') continue;
                 if (Character.isUpperCase(c)) {
-                    white += score[c - 'A'];
+                    sum += score[c - 'A'];
                 } else {
-                    black += score[c - 'a'];
+                    sum -= score[c - 'a'];
                 }
             }
         }
         
-        System.out.println(white - black);
+        System.out.println(sum);
     }
 }
