@@ -16,9 +16,7 @@ class Main {
         
         Arrays.sort(arr);
         
-        int min = arr.length / 3;
-        
-        System.out.println(arr[min + n - 1] - arr[min]);
+        System.out.println(arr[n + n - 1] - arr[n]);
     }
 
 }
