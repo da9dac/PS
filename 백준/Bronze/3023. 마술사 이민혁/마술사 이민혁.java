@@ -18,10 +18,7 @@ class Main {
 			char[] chs = br.readLine().toCharArray();
 
 			for (int j = 0; j < c; j++) {
-				card[i][j] = chs[j];
-				card[i][c2 - j - 1] = chs[j];
-				card[r2 - i - 1][j] = chs[j];
-				card[r2 - i - 1][c2 - j - 1] = chs[j];
+				card[i][j] = card[i][c2 - j - 1] = card[r2 - i - 1][j] = card[r2 - i - 1][c2 - j - 1] = chs[j];
 			}
 		}
         
