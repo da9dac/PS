@@ -52,6 +52,6 @@ class Main {
             n -= 2;
         }
         
-        System.out.println(sum);
+        System.out.print(sum);
     }
 }
