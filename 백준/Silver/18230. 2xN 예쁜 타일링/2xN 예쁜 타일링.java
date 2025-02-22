@@ -10,8 +10,8 @@ class Main {
         int a = Integer.parseInt(st.nextToken());
         int b = Integer.parseInt(st.nextToken());
         
-        Integer[] pa = new Integer[a];
-		Integer[] pb = new Integer[b];
+        int[] pa = new int[a];
+		int[] pb = new int[b];
 
 		st = new StringTokenizer(br.readLine());
 
@@ -25,28 +25,28 @@ class Main {
 			pb[i] = Integer.parseInt(st.nextToken());
 		}
 
-		Arrays.sort(pa, Collections.reverseOrder());
-		Arrays.sort(pb, Collections.reverseOrder());
+		Arrays.sort(pa);
+		Arrays.sort(pb);
         
-        int x = 0;
-        int y = 0;
+        int x = a - 1;
+        int y = b - 1;
         int sum = 0;
         
         if (n % 2 != 0) {
-            sum += pa[x++];
+            sum += pa[x--];
             n--;
         }
         
         while (n > 0) {
-            int tt = x < a - 1 ? pa[x] + pa[x + 1] : 0;
-            int f = y < b ? pb[y] : 0;
+            int tt = x > 0 ? pa[x] + pa[x - 1] : 0;
+            int f = y >= 0 ? pb[y] : 0;
             
             if (tt > f) {
                 sum += tt;
-                x += 2;
+                x -= 2;
             } else {
                 sum += f;
-                y++;
+                y--;
             }
             
             n -= 2;
