@@ -18,11 +18,6 @@ class Main {
                 .append("\n")
                 .append(end)
                 .append("\n");
-            
-            int n = Integer.parseInt(br.readLine());
-            br.readLine();
-            
-            while (n-- > 0) br.readLine();
         }
         
         System.out.println(sb);
