@@ -23,27 +23,22 @@ class Main {
 			int d = Integer.parseInt(br.readLine());
 
 			int left = 0;
-			int right = n - 1;
-			int firstIdx = -1;
+			int right = n;
 
-			while (left <= right) {
+			while (left < right) {
 				int mid = (left + right) / 2;
-				int diff = arr[mid] - d;
-
-				if (diff < 0) {
+				if (arr[mid] < d) {
 					left = mid + 1;
-				} else if (diff > 0) {
-					right = mid - 1;
 				} else {
-					for (int i = mid; i >= 0; i--) {
-						if (arr[i] == d) firstIdx = i;
-						else break;
-					}
-					break;
+					right = mid;
 				}
 			}
 
-			sb.append(firstIdx).append("\n");
+			if (left < n && arr[left] == d) {
+				sb.append(left).append("\n");
+			} else {
+				sb.append(-1).append("\n");
+			}
 		}
 
 		System.out.println(sb);
