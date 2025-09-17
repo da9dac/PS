@@ -1,33 +1,35 @@
 import java.io.*;
 import java.util.*;
 
-public class Main {
+class Main {
 
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		StringBuilder sb = new StringBuilder();
 
 		int n = Integer.parseInt(br.readLine());
-		StringTokenizer st = new StringTokenizer(br.readLine());
-		int x = Integer.parseInt(br.readLine());
-		int cnt = 0;
 
-		int[] nums = new int[n];
-		boolean[] arr = new boolean[2000001];
+		StringTokenizer st = new StringTokenizer(br.readLine());
+
+		int[] arr = new int[n];
+		boolean[] isExist = new boolean[2000001];
 
 		for (int i = 0; i < n; i++) {
-			nums[i] = Integer.parseInt(st.nextToken());
+			arr[i] = Integer.parseInt(st.nextToken());
 		}
 
-		for (int i = 0; i < n; i++) {
-			int currentNumber = nums[i];
-			int targetNumber = x - currentNumber;
+		int x = Integer.parseInt(br.readLine());
 
-			if (targetNumber >= 1 && arr[targetNumber]) {
+		int cnt = 0;
+
+		for (int i = 0; i < n; i++) {
+			int cur = arr[i];
+			int tar = x - cur;
+
+			if (tar > 0 && isExist[tar]) {
 				cnt++;
 			}
 
-			arr[currentNumber] = true;
+			isExist[cur] = true;
 		}
 
 		System.out.println(cnt);
