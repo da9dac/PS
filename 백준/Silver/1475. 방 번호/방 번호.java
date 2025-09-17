@@ -1,36 +1,27 @@
-import java.util.*;
+import java.io.*;
 
 public class Main {
 
-	public static void main(String[] args) {
-		Scanner scanner = new Scanner(System.in);
+	public static void main(String[] args) throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-		String roomNumber = scanner.nextInt() + "";
+		int x = Integer.parseInt(br.readLine());
 
 		int[] count = new int[10];
-		int max = 0;
-		int sixOrNine = 0;
-		int result = 0;
 
-		for (int i = 0; i < roomNumber.length(); i++) {
-			count[roomNumber.charAt(i) - '0']++;
+		while (x > 0) {
+			count[x % 10]++;
+			x /= 10;
 		}
 
-		for (int i = 0; i < count.length; i++) {
-			if (i == 6 || i == 9) {
-				continue;
-			}
+		int max = 0;
+		int sn = (count[6] + count[9] + 1) / 2;
+
+		for (int i = 0; i < 10; i++) {
+			if (i == 6 || i == 9) continue;
 			max = Math.max(max, count[i]);
 		}
 
-		sixOrNine = count[6] + count[9];
-
-		if (max * 2 < sixOrNine) {
-			result = (int) Math.ceil(sixOrNine / 2.0);
-		} else {
-			result = max;
-		}
-
-		System.out.println(result);
+		System.out.println(Math.max(max, sn));
 	}
 }
