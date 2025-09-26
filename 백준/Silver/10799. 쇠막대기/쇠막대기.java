@@ -1,29 +1,28 @@
-import java.util.*;
 import java.io.*;
+import java.util.*;
 
-public class Main {
-
+class Main {
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-		char[] input = br.readLine().toCharArray();
-
+		String expression = br.readLine();
 		Stack<Character> stack = new Stack<>();
 
-		int count = 0;
+		int cnt = 0;
 
-		for (int i = 0; i < input.length; i++) {
-			if (input[i] == '(') {
-				stack.push(input[i]);
-			} else if (input[i - 1] == '(' && input[i] == ')'){
-				stack.pop();
-				count += stack.size();
-			} else {
-				stack.pop();
-				count++;
+		for (int i = 0; i < expression.length(); i++) {
+			char c = expression.charAt(i);
+
+			if (c == '(') {
+				stack.push(c);
+				continue;
 			}
+
+			stack.pop();
+
+			cnt += expression.charAt(i - 1) == '(' ? stack.size() : 1;
 		}
 
-		System.out.println(count);
+		System.out.println(cnt);
 	}
 }
